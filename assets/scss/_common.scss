@@ -1,0 +1,76 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box !important;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 400;
+
+    scroll-behavior: smooth;
+    color: var(--color-main);
+    // text-wrap: wrap;
+    // word-wrap: break-word;
+    // overflow-wrap: break-word;
+    // hyphens: auto;
+    // word-break: break-word;
+}
+
+body {
+    // background: var(--color-second);
+    background: var(--color-dark);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    overflow-x: hidden;
+    min-height: 100vh;
+    position: relative;
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    text-decoration: none;
+    list-style: none;
+}
+
+.container {
+    padding: var(--size-sm);
+    padding-bottom: var(--size-xxl);
+
+    &__content {
+        display: grid;
+        max-width: var(--max-width); // установить можно через инлайновые стили
+
+        grid-template-columns: repeat(12, 1fr);
+    }
+}
+
+.text-gradient-blue {
+    background: var(--gradient-blue);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.text-gradient-orange {
+    background: var(--gradient-orange);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.mobile {
+    display: none; // По умолчанию скрываем иконки
+
+    @media (max-width: 768px) {
+        display: inline-block; // Показываем только на мобильных
+    }
+}
+
+.desktop {
+    display: inline-block; // По умолчанию показываем текст
+
+    @media (max-width: 768px) {
+        display: none; // Скрываем на мобильных
+    }
+}

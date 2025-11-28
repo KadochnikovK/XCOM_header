@@ -1,0 +1,271 @@
+.header {
+    &__top {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 0;
+    }
+
+    &__bottom {
+        background: #f8f9fa;
+        border-top: 1px solid #e9ecef;
+        position: relative;
+    }
+
+    &__nav {
+        position: relative;
+    }
+
+    &__nav-visible {
+        display: flex;
+        align-items: center;
+        min-height: 44px;
+        position: relative;
+    }
+
+    &__list {
+        display: flex;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        
+        &--visible {
+            flex: 1;
+            gap: 0;
+            flex-wrap: nowrap;
+            overflow: hidden;
+        }
+        
+        &--dropdown {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0;
+            min-width: 200px;
+            padding: 8px 0;
+        }
+        
+        &--all {
+            // Скрытый список для копирования элементов
+        }
+    }
+
+    &__list-item {
+        flex-shrink: 0;
+        white-space: nowrap;
+    }
+
+    &__link {
+        display: block;
+        padding: 8px 16px;
+        color: #333;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        border-radius: 6px;
+        white-space: nowrap;
+        
+        &:hover {
+            background: rgba(0, 123, 255, 0.1);
+            color: #007bff;
+        }
+    }
+
+    // Кнопка "Ещё"
+    &__more-wrapper {
+        position: relative;
+        flex-shrink: 0;
+        
+        &:hover {
+            .header__dropdown {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+            
+            .header__more-button svg {
+                transform: rotate(180deg);
+            }
+        }
+    }
+
+    &__more-button {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 16px;
+        background: none;
+        border: none;
+        color: #666;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border-radius: 6px;
+        white-space: nowrap;
+        
+        &:hover {
+            background: rgba(0, 123, 255, 0.1);
+            color: #007bff;
+        }
+        
+        svg {
+            transition: transform 0.3s ease;
+        }
+    }
+
+    // Выпадающий список
+    &__dropdown {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.3s ease;
+        z-index: 1000;
+        min-width: 200px;
+        
+        // Стрелочка сверху
+        &::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            right: 16px;
+            width: 16px;
+            height: 16px;
+            background: white;
+            transform: rotate(45deg);
+            box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.05);
+        }
+    }
+
+    // Адаптивность
+    @media (max-width: 1024px) {
+        &__link {
+            padding: 8px 12px;
+            font-size: 13px;
+        }
+        
+        &__more-button {
+            padding: 8px 12px;
+            font-size: 13px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        &__link {
+            padding: 6px 10px;
+            font-size: 12px;
+        }
+        
+        &__more-button {
+            padding: 6px 10px;
+            font-size: 12px;
+        }
+        
+        // На мобильных делаем выпадашку по клику
+        .header__more-wrapper {
+            &.header__more-wrapper--expanded {
+                .header__dropdown {
+                    opacity: 1;
+                    visibility: visible;
+                    transform: translateY(0);
+                }
+                
+                .header__more-button svg {
+                    transform: rotate(180deg);
+                }
+            }
+        }
+    }
+
+    // Существующие стили верхней части
+    &__input-wrapper {
+        position: relative;
+        margin-left: auto;
+
+        &::after {
+            content: var(--image);
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 16px;
+            cursor: pointer;
+        }
+    }
+    
+    &__input {
+        border-radius: 10pc;
+        background-color: rgba(51, 51, 51, 0.1);
+        border: none;
+        padding: 8px 16px;
+        padding-right: 36px;
+        
+        &::placeholder {
+            color: rgba(51, 51, 51, 0.5);
+        }
+    }
+
+    &__button {
+        border-radius: 10pc;
+        padding: 8px 16px;
+        transition: all 0.3s;
+        color: #fff;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-block;
+
+        * {
+            font-weight: 600;
+        }
+
+        &--main {
+            background: var(--gradient-blue);
+            
+            &:hover {
+                background: var(--gradient-blue-dark);
+            }
+        }
+        
+        &--second {
+            background: var(--gradient-orange);
+            
+            &:hover {
+                background: var(--gradient-orange-dark);
+            }
+        }
+
+        &--third {
+            position: relative;
+            background: white;
+            padding: 6px 16px;
+
+            &::before {
+                content: "";
+                position: absolute;
+                top: -2px;
+                left: -2px;
+                right: -2px;
+                bottom: -2px;
+                background: var(--gradient-blue);
+                border-radius: 10pc;
+                z-index: -1;
+            }
+
+            &:hover {
+                background: var(--gradient-blue);
+                
+                .text-gradient-orange,
+                .text-gradient-blue {
+                    -webkit-text-fill-color: white;
+                    color: white;
+                }
+            }
+        }
+    }
+}

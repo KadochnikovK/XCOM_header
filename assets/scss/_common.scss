@@ -6,7 +6,7 @@
     font-weight: 400;
 
     scroll-behavior: smooth;
-    color: var(--color-main);
+    color: var(--color-dark);
     // text-wrap: wrap;
     // word-wrap: break-word;
     // overflow-wrap: break-word;
@@ -16,7 +16,7 @@
 
 body {
     // background: var(--color-second);
-    background: var(--color-dark);
+
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: center;
@@ -52,6 +52,7 @@ li {
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
+
 .text-gradient-orange {
     background: var(--gradient-orange);
     -webkit-background-clip: text;
@@ -73,4 +74,9 @@ li {
     @media (max-width: 768px) {
         display: none; // Скрываем на мобильных
     }
+}
+
+
+.color-main {
+    color: var(--color-main);
 }

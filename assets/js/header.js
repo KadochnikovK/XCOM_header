@@ -1,4 +1,5 @@
-document.addEventListener('DOMContentLoaded', function() {
+// assets/script.js
+document.addEventListener('DOMContentLoaded', function () {
     class AdaptiveMenu {
         constructor() {
             this.visibleList = document.querySelector('.header__list--visible');
@@ -7,105 +8,144 @@ document.addEventListener('DOMContentLoaded', function() {
             this.moreWrapper = document.querySelector('.header__more-wrapper');
             this.moreButton = document.querySelector('.header__more-button');
             this.navVisible = document.querySelector('.header__nav-visible');
-            
+
+            this.isExpanded = false;
             this.init();
         }
-        
+
         init() {
             this.distributeItems();
             this.addEventListeners();
-            
-            // Перераспределяем при изменении размера окна
+
             window.addEventListener('resize', this.debounce(() => {
                 this.distributeItems();
+                this.closeDropdown();
             }, 250));
         }
-        
+
         distributeItems() {
             // Очищаем списки
             this.visibleList.innerHTML = '';
             this.dropdownList.innerHTML = '';
-            
+
             // Сначала добавляем все элементы в видимый список
             this.allItems.forEach(item => {
                 const clone = item.cloneNode(true);
                 this.visibleList.appendChild(clone);
             });
-            
+
             // Проверяем, какие элементы не помещаются
-            this.hideOverflowingItems();
+            this.checkOverflow();
         }
-        
-        hideOverflowingItems() {
+
+        checkOverflow() {
             const visibleItems = this.visibleList.querySelectorAll('.header__list-item');
             const navRect = this.navVisible.getBoundingClientRect();
-            const moreButtonWidth = 80; // Примерная ширина кнопки "Ещё"
-            const availableWidth = navRect.width - moreButtonWidth;
-            
-            let visibleCount = 0;
+            const moreButtonWidth = 70; // Ширина кнопки "Ещё"
+
+            if (visibleItems.length === 0) return;
+
+            // Измеряем ширину всех элементов
             let totalWidth = 0;
-            
-            // Находим сколько элементов помещается
-            for (let i = 0; i < visibleItems.length; i++) {
-                const item = visibleItems[i];
+            const itemWidths = [];
+
+            visibleItems.forEach(item => {
                 const itemRect = item.getBoundingClientRect();
-                
-                if (totalWidth + itemRect.width <= availableWidth) {
-                    totalWidth += itemRect.width;
+                itemWidths.push(itemRect.width);
+                totalWidth += itemRect.width;
+            });
+
+            const availableWidth = navRect.width - moreButtonWidth - 20; // 20px для отступов
+            console.log('availableWidth', availableWidth, 'totalWidth', totalWidth)
+            // Если все элементы помещаются - скрываем кнопку "Ещё"
+            if (totalWidth <= availableWidth) {
+                this.moreWrapper.style.display = 'none';
+                return;
+            }
+
+            // Показываем кнопку "Ещё"
+            this.moreWrapper.style.display = 'block';
+
+            // Находим, сколько элементов помещается справа
+            let visibleCount = 0;
+            let currentWidth = 0;
+
+            // Идём с конца массива (справа налево)
+            for (let i = 0; i < visibleItems.length; i++) {
+                if (currentWidth + itemWidths[i] <= availableWidth) {
+                    currentWidth += itemWidths[i];
+                    console.log('visibleItems[i]', visibleItems[i].textContent)
                     visibleCount++;
                 } else {
                     break;
                 }
             }
-            
-            // Если все элементы помещаются - скрываем кнопку "Ещё"
-            if (visibleCount === visibleItems.length) {
-                this.moreWrapper.style.display = 'none';
-                return;
-            }
-            
-            // Показываем кнопку "Ещё"
-            this.moreWrapper.style.display = 'flex';
-            
-            // Переносим непоместившиеся элементы в выпадающий список
-            for (let i = visibleCount; i < visibleItems.length; i++) {
-                const item = visibleItems[i];
-                const clone = item.cloneNode(true);
+            console.log('visibleCount', visibleCount, 'currentWidth', currentWidth)
+            // Переносим элементы, которые не поместились справа, в выпадающий список
+            // Это элементы с начала списка (слева)
+            const dropdownStart = visibleCount;
+
+            for (let i = dropdownStart; i < visibleItems.length; i++) {
+                const clone = visibleItems[i].cloneNode(true);
                 this.dropdownList.appendChild(clone);
             }
-            
-            // Удаляем непоместившиеся элементы из видимого списка
-            for (let i = visibleItems.length - 1; i >= visibleCount; i--) {
+
+            // Удаляем перенесенные элементы из видимого списка
+            for (let i = dropdownStart; i < visibleItems.length; i++) {
+
                 visibleItems[i].remove();
+
             }
         }
-        
+
         addEventListeners() {
-            // Для мобильных устройств - переключение по клику
-            if (window.innerWidth <= 768) {
-                this.moreButton.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    this.moreWrapper.classList.toggle('header__more-wrapper--expanded');
-                });
-                
-                // Закрываем при клике вне области
-                document.addEventListener('click', () => {
-                    this.moreWrapper.classList.remove('header__more-wrapper--expanded');
-                });
-                
-                // Не закрываем при клике внутри выпадашки
-                this.dropdownList.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                });
-            }
-            
-            // Закрываем выпадашку при скролле
+            // Переключение выпадающего списка
+            this.moreButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                this.toggleDropdown();
+            });
+
+            // Закрытие при клике вне области
+            document.addEventListener('click', (e) => {
+                if (!this.moreWrapper.contains(e.target)) {
+                    this.closeDropdown();
+                }
+            });
+
+            // Закрытие при клике на ссылку в выпадающем списке
+            this.dropdownList.addEventListener('click', (e) => {
+                if (e.target.tagName === 'A') {
+                    this.closeDropdown();
+                }
+            });
+
+            // Закрытие при скролле
             window.addEventListener('scroll', () => {
-                this.moreWrapper.classList.remove('header__more-wrapper--expanded');
+                this.closeDropdown();
+            });
+
+            // Закрытие при изменении размера окна
+            window.addEventListener('resize', () => {
+                this.closeDropdown();
             });
         }
-        
+
+        toggleDropdown() {
+            this.isExpanded = !this.isExpanded;
+
+            if (this.isExpanded) {
+                this.moreButton.classList.add('header__more-button--expanded');
+            } else {
+                this.moreButton.classList.remove('header__more-button--expanded');
+            }
+        }
+
+        closeDropdown() {
+            this.isExpanded = false;
+            this.moreButton.classList.remove('header__more-button--expanded');
+        }
+
         debounce(func, wait) {
             let timeout;
             return function executedFunction(...args) {
@@ -118,7 +158,7 @@ document.addEventListener('DOMContentLoaded', function() {
             };
         }
     }
-    
-    // Инициализируем меню
+
+    // Инициализируем адаптивное меню
     new AdaptiveMenu();
 });

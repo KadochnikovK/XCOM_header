@@ -1,131 +1,147 @@
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="assets/style.css" />
-    <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css" />
-    <title>XCOM_header</title>
-  </head>
-  <body>
-    <header class="header">
-      <div class="header__top">
-        <a href="#">
-          <img class="header__logo" src="assets/images/logo.svg" alt="XCOM" />
-        </a>
-        <div class="header__input-wrapper" style="--image: url(./images/icon-search.svg)">
-          <input type="text" class="header__input" placeholder="Поиск..." />
-        </div>
-        <a href="#" class="header__button header__button--third"><span class="text-gradient-blue">b</span><span class="text-gradient-orange">2</span><span class="text-gradient-blue">b</span></a>
-        <a href="#" class="header__button header__button--main"><i class="mobile fa-solid fa-envelope"></i> <span class="desktop">Оставить заявку</span></a>
-        <a href="#" class="header__button header__button--second"><i class="mobile fa-solid fa-phone"></i> <span class="desktop">+7 499 521-58-78</span></a>
-      </div>
-      <div class="header__bottom">
-        <nav class="header__nav">
-          <!-- Видимая строка - будет заполняться динамически -->
-          <div class="header__nav-visible">
-            <ul class="header__list header__list--visible">
-              <!-- Сюда JS будет вставлять видимые пункты -->
-            </ul>
-            <!-- Кнопка "Ещё" - будет показываться только если есть скрытые пункты -->
-            <div class="header__more-wrapper" style="display: none">
-              <button class="header__more-button" type="button">
-                Ещё
-                <svg width="12" height="7" viewBox="0 0 12 7" fill="none">
-                  <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                </svg>
-              </button>
 
-              <!-- Выпадающий список со скрытыми пунктами -->
-              <div class="header__dropdown">
-                <ul class="header__list header__list--dropdown">
-                  <!-- Сюда JS будет вставлять скрытые пункты -->
-                </ul>
-              </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="assets/style.css" />
+  <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css" />
+  <title>XCOM_header</title>
+</head>
+
+<body>
+  <header class="header">
+    <div class="header__top">
+      <a href="#" class="header__link" style="margin-right: auto"><i class="color-main fa-solid fa-location-dot"></i>
+        Москва <i class="fa-solid fa-angle-down"></i></a>
+      <a href="#" class="header__link"><i class="fa-regular fa-clock"></i> Режим работы: 9:00
+        — 21:00</a>
+      <a href="#" class="header__link"><i class="fa-solid fa-phone"></i></i> +7 (499) 495-36-11</a>
+      <a href="#" class="header__link" style="color: var(--color-second)"><i class="fa-solid fa-briefcase"
+          style="color: var(--color-second)"></i>
+        Отправить запрос</a>
+    </div>
+    <div class="header__top">
+      <a href="#" class="header__logo">
+        <img class="header__logo-image" src="assets/images/logo.svg" alt="XCOM" />
+      </a>
+      <a href="#" class="header__button header__button--main"><i class="mobile fa-solid fa-list"></i> <span
+          class="desktop">Каталог</span></a>
+      <div class="header__input-wrapper" style="--image: url(./images/icon-search.svg)">
+        <input type="text" class="header__input" placeholder="Поиск..." />
+        <i class="header__input-icon fa-solid fa-search"></i>
+      </div>
+      <!-- <a href="#" class="header__button header__button--third"><span class="text-gradient-blue">b</span><span class="text-gradient-orange">2</span><span class="text-gradient-blue">b</span></a> -->
+      <!-- <a href="#" class="header__button header__button--main"><i class="mobile fa-solid fa-envelope"></i> <span class="desktop">Оставить заявку</span></a> -->
+      <a href="#" class="header__button header__button--second"><i class="fa-solid fa-truck"></i> <span
+          class="desktop">Поставки</span></a>
+    </div>
+    <div class="header__bottom">
+      <nav class="header__nav">
+        <!-- Видимая строка - будет заполняться динамически -->
+        <div class="header__nav-visible">
+          <!-- Кнопка "Ещё" - будет показываться только если есть скрытые пункты -->
+          <div class="header__more-wrapper" style="display: none">
+            <button class="header__more-button" type="button">
+              Ещё
+              <i class="arrow-icon fa-solid fa-angle-down"></i>
+            </button>
+
+            <!-- Выпадающий список со скрытыми пунктами -->
+            <div class="header__dropdown">
+              <ul class="header__list header__list--dropdown">
+                <!-- Сюда JS будет вставлять скрытые пункты -->
+              </ul>
             </div>
           </div>
-
-          <!-- Исходный список всех пунктов (скрыт) -->
-          <ul class="header__list header__list--all" style="display: none">
-            <li class="header__list-item">
-              <a href="#" class="header__link">Поставки</a>
-            </li>
-            <li class="header__list-item">
-              <a href="#" class="header__link">Системная интеграция</a>
-            </li>
-            <li class="header__list-item">
-              <a href="#" class="header__link">Услуги</a>
-            </li>
-            <li class="header__list-item">
-              <a href="#" class="header__link">Импортозамещение</a>
-            </li>
-            <li class="header__list-item">
-              <a href="#" class="header__link">Контакты</a>
-            </li>
-            <li class="header__list-item">
-              <a href="#" class="header__link">Компьютеры и ноутбуки</a>
-            </li>
-            <li class="header__list-item">
-              <a href="#" class="header__link">Серверное оборудование</a>
-            </li>
-            <li class="header__list-item">
-              <a href="#" class="header__link">Сетевое оборудование</a>
-            </li>
-            <li class="header__list-item">
-              <a href="#" class="header__link">Системы хранения данных</a>
-            </li>
-            <li class="header__list-item">
-              <a href="#" class="header__link">Периферия</a>
-            </li>
-            <li class="header__list-item">
-              <a href="#" class="header__link">Комплектующие</a>
-            </li>
-            <li class="header__list-item">
-              <a href="#" class="header__link">Оргтехника</a>
-            </li>
-            <li class="header__list-item">
-              <a href="#" class="header__link">Программное обеспечение</a>
-            </li>
-            <li class="header__list-item">
-              <a href="#" class="header__link">ИТ-аутсорсинг</a>
-            </li>
-            <li class="header__list-item">
-              <a href="#" class="header__link">Техническая поддержка</a>
-            </li>
-            <li class="header__list-item">
-              <a href="#" class="header__link">Обслуживание серверов</a>
-            </li>
-            <li class="header__list-item">
-              <a href="#" class="header__link">Монтаж СКС</a>
-            </li>
-            <li class="header__list-item">
-              <a href="#" class="header__link">Виртуализация</a>
-            </li>
-            <li class="header__list-item">
-              <a href="#" class="header__link">Облачные решения</a>
-            </li>
-            <li class="header__list-item">
-              <a href="#" class="header__link">Кибербезопасность</a>
-            </li>
-            <li class="header__list-item">
-              <a href="#" class="header__link">Видеонаблюдение</a>
-            </li>
-            <li class="header__list-item">
-              <a href="#" class="header__link">ИБП и стабилизаторы</a>
-            </li>
-            <li class="header__list-item">
-              <a href="#" class="header__link">Расходные материалы</a>
-            </li>
-            <li class="header__list-item">
-              <a href="#" class="header__link">Аренда оборудования</a>
-            </li>
-            <li class="header__list-item">
-              <a href="#" class="header__link">О компании</a>
-            </li>
+          <ul class="header__list header__list--visible">
+            <!-- Сюда JS будет вставлять видимые пункты -->
           </ul>
-        </nav>
-      </div>
-    </header>
-    <script src="assets/js/header.js"></script>
-  </body>
+
+        </div>
+
+        <!-- Исходный список всех пунктов (скрыт) -->
+        <ul class="header__list header__list--all" style="display: none">
+          <li class="header__list-item">
+            <a href="#" class="header__link">1Поставки</a>
+          </li>
+          <li class="header__list-item">
+            <a href="#" class="header__link">2Системная интеграция</a>
+          </li>
+          <li class="header__list-item">
+            <a href="#" class="header__link">3Услуги</a>
+          </li>
+          <li class="header__list-item">
+            <a href="#" class="header__link">4Импортозамещение</a>
+          </li>
+          <li class="header__list-item">
+            <a href="#" class="header__link">5Контакты</a>
+          </li>
+          <li class="header__list-item">
+            <a href="#" class="header__link">6Компьютеры и ноутбуки</a>
+          </li>
+          <li class="header__list-item">
+            <a href="#" class="header__link">7Серверное оборудование</a>
+          </li>
+          <li class="header__list-item">
+            <a href="#" class="header__link">8Сетевое оборудование</a>
+          </li>
+          <li class="header__list-item">
+            <a href="#" class="header__link">9Системы хранения данных</a>
+          </li>
+          <li class="header__list-item">
+            <a href="#" class="header__link">10Периферия</a>
+          </li>
+          <li class="header__list-item">
+            <a href="#" class="header__link">11Комплектующие</a>
+          </li>
+          <li class="header__list-item">
+            <a href="#" class="header__link">12Оргтехника</a>
+          </li>
+          <li class="header__list-item">
+            <a href="#" class="header__link">13Программное обеспечение</a>
+          </li>
+          <li class="header__list-item">
+            <a href="#" class="header__link">14ИТ-аутсорсинг</a>
+          </li>
+          <li class="header__list-item">
+            <a href="#" class="header__link">15Техническая поддержка</a>
+          </li>
+          <li class="header__list-item">
+            <a href="#" class="header__link">16Обслуживание серверов</a>
+          </li>
+          <li class="header__list-item">
+            <a href="#" class="header__link">17Монтаж СКС</a>
+          </li>
+          <li class="header__list-item">
+            <a href="#" class="header__link">18Виртуализация</a>
+          </li>
+          <li class="header__list-item">
+            <a href="#" class="header__link">19Облачные решения</a>
+          </li>
+          <li class="header__list-item">
+            <a href="#" class="header__link">20Кибербезопасность</a>
+          </li>
+          <li class="header__list-item">
+            <a href="#" class="header__link">21Видеонаблюдение</a>
+          </li>
+          <li class="header__list-item">
+            <a href="#" class="header__link">22ИБП и стабилизаторы</a>
+          </li>
+          <li class="header__list-item">
+            <a href="#" class="header__link">23Расходные материалы</a>
+          </li>
+          <li class="header__list-item">
+            <a href="#" class="header__link">24Аренда оборудования</a>
+          </li>
+          <li class="header__list-item">
+            <a href="#" class="header__link">25О компании</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <script src="assets/js/header.js"></script>
+</body>
+
 </html>

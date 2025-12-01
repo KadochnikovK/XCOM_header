@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 itemWidths.push(itemRect.width);
                 totalWidth += itemRect.width;
             });
-
+            console.log('navRect', navRect, moreButtonWidth)
             const availableWidth = navRect.width - moreButtonWidth - 20; // 20px для отступов
             console.log('availableWidth', availableWidth, 'totalWidth', totalWidth)
             // Если все элементы помещаются - скрываем кнопку "Ещё"

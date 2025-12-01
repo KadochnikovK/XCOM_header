@@ -47,6 +47,12 @@ li {
   grid-template-columns: repeat(12, 1fr);
 }
 
+.content {
+  max-width: 1400px;
+  margin-inline: auto;
+  width: 100%;
+}
+
 .text-gradient-blue {
   background: var(--gradient-blue);
   -webkit-background-clip: text;
@@ -83,6 +89,18 @@ li {
   color: var(--color-main);
 }
 
+.header__content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+}
+.header__content--bottom {
+  display: block;
+  background: #f8f9fa;
+  border-top: 1px solid #e9ecef;
+  position: relative;
+}
 .header__top {
   display: flex;
   align-items: center;
@@ -306,4 +324,4 @@ li {
 .header__button--third:hover .text-gradient-blue {
   -webkit-text-fill-color: white;
   color: white;
-}/*# sourceMappingURL=style.css.map */
+}

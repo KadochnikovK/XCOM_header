@@ -46,6 +46,12 @@ li {
     }
 }
 
+.content {
+    max-width: 1400px;
+    margin-inline: auto;
+    width: 100%;
+}
+
 .text-gradient-blue {
     background: var(--gradient-blue);
     -webkit-background-clip: text;
@@ -75,7 +81,6 @@ li {
         display: none; // Скрываем на мобильных
     }
 }
-
 
 .color-main {
     color: var(--color-main);

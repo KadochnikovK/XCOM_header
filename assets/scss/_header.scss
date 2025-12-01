@@ -1,7 +1,19 @@
 .header {
+    &__logo {
+    }
+    &__content {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        position: relative;
 
-    &__logo {}
-
+        &--bottom {
+            display: block;
+            background: #f8f9fa;
+            border-top: 1px solid #e9ecef;
+            position: relative;
+        }
+    }
     &__top {
         display: flex;
         align-items: center;
@@ -135,7 +147,7 @@
 
         // Стрелочка сверху
         &::before {
-            content: '';
+            content: "";
             position: absolute;
             top: -8px;
             right: 16px;

@@ -40,7 +40,7 @@ li {
 
     &__content {
         display: grid;
-        max-width: var(--max-width); // установить можно через инлайновые стили
+        max-width: var(--max-width);
 
         grid-template-columns: repeat(12, 1fr);
     }
@@ -67,18 +67,18 @@ li {
 }
 
 .mobile {
-    display: none; // По умолчанию скрываем иконки
+    display: inherit !important;
 
-    @media (max-width: 768px) {
-        display: inline-block; // Показываем только на мобильных
+    @include md {
+        display: none !important;
     }
 }
 
-.desktop {
-    display: inline-block; // По умолчанию показываем текст
+.desktop-only {
+    display: none !important; 
 
-    @media (max-width: 768px) {
-        display: none; // Скрываем на мобильных
+    @include md {
+        display: inherit !important; 
     }
 }
 

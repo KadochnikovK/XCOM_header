@@ -68,20 +68,20 @@ li {
 }
 
 .mobile {
-  display: none;
+  display: inherit !important;
 }
-@media (max-width: 768px) {
+@media (min-width: 1024px) {
   .mobile {
-    display: inline-block;
+    display: none !important;
   }
 }
 
-.desktop {
-  display: inline-block;
+.desktop-only {
+  display: none !important;
 }
-@media (max-width: 768px) {
-  .desktop {
-    display: none;
+@media (min-width: 1024px) {
+  .desktop-only {
+    display: inherit !important;
   }
 }
 
@@ -223,7 +223,7 @@ li {
   content: "";
   position: absolute;
   top: -8px;
-  right: 16px;
+  left: 16px;
   width: 16px;
   height: 16px;
   background: white;

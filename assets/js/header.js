@@ -24,28 +24,24 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         distributeItems() {
-            // Очищаем списки
+          
             this.visibleList.innerHTML = '';
             this.dropdownList.innerHTML = '';
-
-            // Сначала добавляем все элементы в видимый список
             this.allItems.forEach(item => {
                 const clone = item.cloneNode(true);
                 this.visibleList.appendChild(clone);
             });
 
-            // Проверяем, какие элементы не помещаются
+   
             this.checkOverflow();
         }
 
         checkOverflow() {
             const visibleItems = this.visibleList.querySelectorAll('.header__list-item');
             const navRect = this.navVisible.getBoundingClientRect();
-            const moreButtonWidth = 70; // Ширина кнопки "Ещё"
+            const moreButtonWidth = 70; 
 
             if (visibleItems.length === 0) return;
-
-            // Измеряем ширину всех элементов
             let totalWidth = 0;
             const itemWidths = [];
 
@@ -55,22 +51,22 @@ document.addEventListener('DOMContentLoaded', function () {
                 totalWidth += itemRect.width;
             });
             console.log('navRect', navRect, moreButtonWidth)
-            const availableWidth = navRect.width - moreButtonWidth - 20; // 20px для отступов
+            const availableWidth = navRect.width - moreButtonWidth - 20;
             console.log('availableWidth', availableWidth, 'totalWidth', totalWidth)
-            // Если все элементы помещаются - скрываем кнопку "Ещё"
+        
             if (totalWidth <= availableWidth) {
                 this.moreWrapper.style.display = 'none';
                 return;
             }
 
-            // Показываем кнопку "Ещё"
+     
             this.moreWrapper.style.display = 'block';
 
-            // Находим, сколько элементов помещается справа
+          
             let visibleCount = 0;
             let currentWidth = 0;
 
-            // Идём с конца массива (справа налево)
+       
             for (let i = 0; i < visibleItems.length; i++) {
                 if (currentWidth + itemWidths[i] <= availableWidth) {
                     currentWidth += itemWidths[i];
@@ -81,8 +77,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }
             console.log('visibleCount', visibleCount, 'currentWidth', currentWidth)
-            // Переносим элементы, которые не поместились справа, в выпадающий список
-            // Это элементы с начала списка (слева)
+      
             const dropdownStart = visibleCount;
 
             for (let i = dropdownStart; i < visibleItems.length; i++) {
@@ -90,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 this.dropdownList.appendChild(clone);
             }
 
-            // Удаляем перенесенные элементы из видимого списка
+     
             for (let i = dropdownStart; i < visibleItems.length; i++) {
 
                 visibleItems[i].remove();
@@ -99,33 +94,33 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         addEventListeners() {
-            // Переключение выпадающего списка
+            
             this.moreButton.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
                 this.toggleDropdown();
             });
 
-            // Закрытие при клике вне области
+        
             document.addEventListener('click', (e) => {
                 if (!this.moreWrapper.contains(e.target)) {
                     this.closeDropdown();
                 }
             });
 
-            // Закрытие при клике на ссылку в выпадающем списке
+
             this.dropdownList.addEventListener('click', (e) => {
                 if (e.target.tagName === 'A') {
                     this.closeDropdown();
                 }
             });
 
-            // Закрытие при скролле
+
             window.addEventListener('scroll', () => {
                 this.closeDropdown();
             });
 
-            // Закрытие при изменении размера окна
+        
             window.addEventListener('resize', () => {
                 this.closeDropdown();
             });
@@ -159,6 +154,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Инициализируем адаптивное меню
+
     new AdaptiveMenu();
 });

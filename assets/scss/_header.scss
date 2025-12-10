@@ -1,11 +1,19 @@
 .header {
     &__logo {
+        display: flex;
+        align-items: center;
+        width: max-content;
+        justify-content: flex-start;
+    }
+    &__logo-image {
+        height: 30px;
     }
     &__content {
         display: flex;
         align-items: center;
-        gap: 16px;
+        gap: 8px;
         position: relative;
+        padding-inline: 16px;
 
         &--bottom {
             display: block;
@@ -246,7 +254,8 @@
         color: #fff;
         font-weight: 600;
         text-decoration: none;
-        display: inline-block;
+        display: flex;
+        gap: 8px;
 
         * {
             font-weight: 600;
@@ -295,6 +304,18 @@
                     color: white;
                 }
             }
+        }
+    }
+    &__button-content {
+        display: none;
+        @include md {
+            display: block;
+        }
+    }
+
+    &__hamburger {
+        span {
+            border-radius: 10pc;
         }
     }
 }

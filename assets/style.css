@@ -251,7 +251,6 @@ li {
   position: relative;
   margin-right: auto;
   flex: 1;
-  max-width: 900px;
 }
 .header__input {
   border-radius: 10pc;

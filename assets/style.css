@@ -150,7 +150,7 @@ li {
   align-items: flex-start;
   gap: 0;
   min-width: 200px;
-  padding: 8px 0;
+  padding: 8px;
 }
 .header__list-item {
   flex-shrink: 0;
